@@ -12,7 +12,7 @@ function BrainModel() {
         if(modelRef.current){
             console.log("inside useEffect")
             const tl = gsap.timeline({repeat: -1, defaults: {ease: "none"}});
-            tl.fromTo(modelRef.current.rotation, {x:0, y:-Math.PI/2, z:0}, {x:0, y:Math.PI/2, z:0, duration: 20,repeat:1});
+            tl.fromTo(modelRef.current.rotation, {x:0, y:-Math.PI/2, z:0}, {x:0, y:-Math.PI/2, z:0, duration: 40,repeat:1});
         }
 
     }, [])
