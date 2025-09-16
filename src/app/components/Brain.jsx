@@ -1,41 +1,60 @@
 'use client'
-import React, { useRef, useEffect, Suspense } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Canvas, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import gsap from 'gsap'
 
-function BrainModel() {
+function Brain() {
     const modelRef = useRef()
     const model = useLoader(GLTFLoader, "/brain.glb");
 
     useEffect(() => {
-        if(modelRef.current){
-            console.log("inside useEffect")
-            const tl = gsap.timeline({repeat: -1, defaults: {ease: "none"}});
-            tl.fromTo(modelRef.current.rotation, {x:0, y:-Math.PI/2, z:0}, {x:0, y:-Math.PI/2, z:0, duration: 40,repeat:1});
-        }
-
-    }, [])
+        console.log("useEffect running, model:", model);
+        console.log("modelRef.current:", modelRef.current);
+        
+        // Use a small delay to ensure the model is attached to the DOM
+        const timer = setTimeout(() => {
+            if (modelRef.current) {
+                console.log("Model ref found after timeout:", modelRef.current);
+                
+                // Set initial rotation
+                modelRef.current.rotation.set(0, -Math.PI/2, 0);
+                
+                const tl = gsap.timeline({repeat: -1, defaults: {ease: "none"}});
+                
+                // Use a simpler approach - just rotate continuously
+                tl.to(modelRef.current.rotation, {
+                    y: "+=6.283", // Full rotation (2π)
+                    duration: 10,
+                    onStart: () => console.log("GSAP animation started"),
+                    onUpdate: () => {
+                        console.log("Current Y rotation:", modelRef.current.rotation.y);
+                    }
+                });
+            } else {
+                console.log("modelRef.current is still null after timeout");
+            }
+        }, 100);
+        
+        return () => clearTimeout(timer);
+    }, [model])
 
     return (
-        <mesh receiveShadow>
-            <primitive ref={modelRef} object={model.scene} scale={10} position={[0, 0, -5]} rotation={[0,-Math.PI/2,0]} />
-        </mesh>
-    )
-}
-
-function Brain() {
-  return (
-    <div className="absolute inset-0 z-0">
-      <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-black text-white text-2xl font-bold">Loading...</div>}>
         <Canvas className='w-full h-screen' shadows gl={{ alpha: true }}>
             <ambientLight intensity={1} />
             <pointLight position={[10, 10, 10]} intensity={50} castShadow/>
-            <BrainModel />
+            <mesh receiveShadow>
+                <primitive 
+                    ref={modelRef} 
+                    object={model.scene} 
+                    scale={10} 
+                    position={[0, 0, -5]}
+                    // Remove the rotation prop to avoid conflicts
+                />
+                <shadowMaterial color={"blue"} opacity={0.5} />
+            </mesh>
         </Canvas>
-      </Suspense>
-    </div>
-  )
+    )
 }
 
 export default Brain
