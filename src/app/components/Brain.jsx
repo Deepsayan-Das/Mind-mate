@@ -30,11 +30,23 @@ function Brain() {
             currentVelocity.current *= velocityDecay
 
             if (Math.abs(currentVelocity.current) < 0.0001) {
-                targetRotation.current = gsap.utils.interpolate(targetRotation.current, 0, 0.1)
+                targetRotation.current += 0.001 // passive rotation speed
             }
 
             requestAnimationFrame(animate)
         }
+
+        // Intro animation: scale up and rise from below
+        gsap.fromTo(
+            modelRef.current.scale,
+            { x: 0, y: 0, z: 0 },
+            { x: 12, y: 12, z: 12, duration: 1, ease: "power2.out" }
+        )
+        gsap.fromTo(
+            modelRef.current.position,
+            { y: -10 },
+            { y: 0, duration: 1, ease: "power2.out" }
+        )
 
         animate()
 
@@ -53,7 +65,7 @@ function Brain() {
         <primitive
             ref={modelRef}
             object={model.scene}
-            scale={10}
+            scale={12}
             position={[0, 0, -5]}
         />
     )

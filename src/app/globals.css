@@ -27,3 +27,29 @@ body {
  .negetive{
   mix-blend-mode:screen;
  }
+
+/* Animation styles for wave text */
+.wave-text {
+  display: inline-block;
+  overflow: hidden;
+  overflow-y: hidden; /* to hide letters coming from bottom */
+  white-space: nowrap;
+  vertical-align: bottom;
+  line-height: 1;
+
+}
+
+.wave-text span {
+  display: inline-block;
+  transform: translateY(150%);
+  animation-fill-mode: forwards;
+  animation-name: waveUp;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.8s;
+}
+
+@keyframes waveUp {
+  to {
+    transform: translateY(0);
+  }
+}
