@@ -9,35 +9,13 @@ function Brain() {
     const model = useLoader(GLTFLoader, "/brain.glb");
 
     useEffect(() => {
-        console.log("useEffect running, model:", model);
-        console.log("modelRef.current:", modelRef.current);
-        
-        // Use a small delay to ensure the model is attached to the DOM
-        const timer = setTimeout(() => {
-            if (modelRef.current) {
-                console.log("Model ref found after timeout:", modelRef.current);
-                
-                // Set initial rotation
-                modelRef.current.rotation.set(0, -Math.PI/2, 0);
-                
-                const tl = gsap.timeline({repeat: -1, defaults: {ease: "none"}});
-                
-                // Use a simpler approach - just rotate continuously
-                tl.to(modelRef.current.rotation, {
-                    y: "+=6.283", // Full rotation (2π)
-                    duration: 10,
-                    onStart: () => console.log("GSAP animation started"),
-                    onUpdate: () => {
-                        console.log("Current Y rotation:", modelRef.current.rotation.y);
-                    }
-                });
-            } else {
-                console.log("modelRef.current is still null after timeout");
-            }
-        }, 100);
-        
-        return () => clearTimeout(timer);
-    }, [model])
+        if(modelRef.current){
+            console.log("inside useEffect")
+            const tl = gsap.timeline({repeat: -1, defaults: {ease: "none"}});
+            tl.fromTo(modelRef.current.rotation, {x:0, y:-Math.PI/2, z:0}, {x:0, y:-Math.PI/2, z:0, duration: 40,repeat:1});
+        }
+
+    }, [])
 
     return (
         <Canvas className='w-full h-screen' shadows gl={{ alpha: true }}>
