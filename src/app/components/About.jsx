@@ -11,8 +11,8 @@ function About() {
       scrollTrigger: {
         trigger: '.about-section',
         start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 4,
+        end: 'bottom 50%',
+        scrub: 3,
         toggleActions: 'play none none reverse'
       }
     })
