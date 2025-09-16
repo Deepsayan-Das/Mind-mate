@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Brain from "./components/Brain";
 import { Canvas } from "@react-three/fiber";
+import BrainCanvas from "./components/wrapper";
 
 export default function Home() {
   return (
@@ -12,7 +13,8 @@ export default function Home() {
           YOUR MIND MATTERS
         </h1>
       </div>
-      <Brain/>
+      <BrainCanvas/>
+      
     </div>
 
 
