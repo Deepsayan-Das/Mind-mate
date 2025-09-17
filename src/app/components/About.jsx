@@ -11,7 +11,7 @@ function About() {
       scrollTrigger: {
         trigger: '.about-section',
         start: 'top 80%',
-        end: 'bottom 50%',
+        end: 'bottom 60%',
         scrub: 3,
         toggleActions: 'play none none reverse'
       }
@@ -27,7 +27,7 @@ function About() {
       <div className="absolute left-[10%] top-4 h-full w-2  bg-white about-line"></div>
       <div className='h-full w-[40%] ml-[10%]'>
         <h1 className='font-bold font-inter text-5xl md:text-7xl lg:text-8xl ml-8 about-header'>About Us</h1><br/>
-        <div className='font-inter text-2xl md:text-4xl lg:text-5xl font-extrathin ml-8'>
+        <div className='font-inter text-xl md:text-3xl lg:text-4xl font-extrathin ml-8'>
           {[
             "Breaking the stigma.",
             "Providing accessible",

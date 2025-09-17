@@ -28,6 +28,24 @@ body {
   mix-blend-mode:screen;
  }
 
+/* Button hover white background progress bar */
+.proto-button div {
+  width: 0;
+  transition: width 0.5s ease-in-out;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 0;
+  border-top-left-radius: 1%;
+  border-bottom-left-radius: 1%;
+}
+
+.proto-button:hover div {
+  width: 100%;
+}
+
 /* Animation styles for wave text */
 .wave-text {
   display: inline-block;
@@ -53,3 +71,16 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Feature section styles */
