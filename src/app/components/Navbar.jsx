@@ -28,7 +28,7 @@ function Navbar() {
   }, [lastScrollY])
 
   return (
-    <nav className={`fixed top-0 left-0 w-full bg-[#0a0a0a] text-white py-4 px-6 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <nav className={`fixed top-0 left-0 w-full bg-transparent text-white py-4 px-6 z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <h1 className="text-xl font-bold font-inter">Mind-Mate</h1>
         <ul className="flex space-x-8">
