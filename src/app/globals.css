@@ -84,3 +84,6 @@ body {
 }
 
 /* Feature section styles */
+*{
+  scroll-behavior: smooth;
+}

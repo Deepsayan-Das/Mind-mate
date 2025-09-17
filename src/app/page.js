@@ -6,6 +6,8 @@ import Feature from "./components/Feature";
 import Proto from "./components/Proto";
 import BrainCanvas from "./components/wrapper";
 import FloatingWindow from "./components/FloatingWindow";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 function PlaceholderCanvas() {
   return (
@@ -17,7 +19,7 @@ function PlaceholderCanvas() {
 
 export default function Home() {
   const text = "YOUR MIND MATTERS";
-  const shouldLoadBrain = false;  // Toggle this flag as needed
+  const shouldLoadBrain = true;  // Toggle this flag as needed
 
   useEffect(() => {
     const spans = document.querySelectorAll('.wave-text span');
@@ -26,7 +28,8 @@ export default function Home() {
 
   return (
     <div className="h-screen w-screen">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 mix-blend-difference">
+      <Navbar />
+      <div id="home" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 mix-blend-difference">
         <h1 className="text-white opacity-100 font-bold font-inter text-5xl md:text-7xl lg:text-8xl w-full text-center whitespace-nowrap negetive wave-text">
           {text.split('').map((letter, index) => (
             <span key={index}>
@@ -38,11 +41,17 @@ export default function Home() {
 
       {shouldLoadBrain ? <BrainCanvas /> : <PlaceholderCanvas />}
       <br/><br/>
-      <About />
-      <Proto />
+      <div id="about">
+        <About />
+      </div>
+      <div id="chat">
+        <Proto />
+      </div>
       <br/><br/><br/>
-      <Feature />
-      
+      <div id="features">
+        <Feature />
+      </div>
+      <Footer />
     </div>
   );
 }
