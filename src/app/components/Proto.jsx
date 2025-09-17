@@ -1,11 +1,14 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import FloatingWindow from './FloatingWindow'
 
 gsap.registerPlugin(ScrollTrigger)
 
 function Proto() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  
   const sectionRef = useRef(null)
   const h1Ref = useRef(null)
 
@@ -108,10 +111,11 @@ function Proto() {
 
       <br/>
 
-      <button className='relative w-[40%] h-12 rounded-full border-2 border-white bg-transparent hover:text-black transition-all ease-in-out duration-500 font-bold overflow-hidden proto-button'>
+      <button onClick={() => setIsChatOpen(true)} className='relative w-[40%] h-12 rounded-full border-2 border-white bg-transparent hover:text-black transition-all ease-in-out duration-500 font-bold overflow-hidden proto-button'>
         <span className='relative z-10'>Talk to Our AI</span>
         <div className='absolute top-0 right-0 h-full w-0 bg-white transition-all duration-500 ease-in-out hover:w-full'></div>
       </button>
+      {isChatOpen && <FloatingWindow onClose={() => setIsChatOpen(false)} />}
     </div>
   )
 }

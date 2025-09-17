@@ -5,6 +5,7 @@ import About from "./components/About";
 import Feature from "./components/Feature";
 import Proto from "./components/Proto";
 import BrainCanvas from "./components/wrapper";
+import FloatingWindow from "./components/FloatingWindow";
 
 function PlaceholderCanvas() {
   return (
@@ -16,7 +17,7 @@ function PlaceholderCanvas() {
 
 export default function Home() {
   const text = "YOUR MIND MATTERS";
-  const shouldLoadBrain = true;  // Toggle this flag as needed
+  const shouldLoadBrain = false;  // Toggle this flag as needed
 
   useEffect(() => {
     const spans = document.querySelectorAll('.wave-text span');
@@ -41,6 +42,7 @@ export default function Home() {
       <Proto />
       <br/><br/><br/>
       <Feature />
+      
     </div>
   );
 }
