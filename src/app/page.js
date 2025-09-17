@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className="h-screen w-screen">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 mix-blend-difference">
-        <h1 className="text-white opacity-80 font-bold font-inter text-5xl md:text-7xl lg:text-8xl w-full text-center whitespace-nowrap negetive wave-text">
+        <h1 className="text-white opacity-100 font-bold font-inter text-5xl md:text-7xl lg:text-8xl w-full text-center whitespace-nowrap negetive wave-text">
           {text.split('').map((letter, index) => (
             <span key={index}>
               {letter === ' ' ? '\u00A0' : letter}
@@ -36,7 +36,7 @@ export default function Home() {
       </div>
 
       {shouldLoadBrain ? <BrainCanvas /> : <PlaceholderCanvas />}
-
+      <br/><br/>
       <About />
       <Proto />
       <br/><br/><br/>

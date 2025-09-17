@@ -1,2 +1,3 @@
-- [x] Update src/app/globals.css with CSS classes for feature cards (subtle grey gradient, theme-aware), hover effects (float and brightish grey shadow), and scroll-triggered animations for header letters and card pop-ups.
-- [x] Update src/app/components/Feature.jsx to include the "FEATURES" header with individual letter spans, a grid of 7 cards each with red icon div, heading, and 2-line description, and add IntersectionObserver logic to trigger animations on scroll.
+- [x] Import useLoader and TextureLoader from 'three' in wrapper.jsx
+- [x] Load canvas-bg.jpg as a texture using useLoader
+- [x] Set the background prop of the Canvas to this texture
