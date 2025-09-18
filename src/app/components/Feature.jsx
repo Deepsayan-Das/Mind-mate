@@ -1,6 +1,56 @@
 'use client'
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Bot, ShieldCheck, Zap, BarChart, Settings, Layers, Code } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// 1. Data array with objects for each feature
+const featuresData = [
+  {
+    icon: <Bot size={32} className="text-white" />,
+    title: "AI-Powered Assistant",
+    line1: "Engage with an intelligent assistant.",
+    line2: "Trained for helpful, safe conversations."
+  },
+  {
+    icon: <ShieldCheck size={32} className="text-white" />,
+    title: "Privacy First",
+    line1: "Your conversations are secure and private.",
+    line2: "We don't store personal chat data."
+  },
+  {
+    icon: <Zap size={32} className="text-white" />,
+    title: "Fast Responses",
+    line1: "Optimized for speed and efficiency.",
+    line2: "Get the information you need, instantly."
+  },
+  {
+    icon: <BarChart size={32} className="text-white" />,
+    title: "Insightful Analytics",
+    line1: "Track your usage and performance.",
+    line2: "Understand patterns and improve."
+  },
+  {
+    icon: <Settings size={32} className="text-white" />,
+    title: "Customizable",
+    line1: "Tailor the experience to your needs.",
+    line2: "Adjust settings for a perfect fit."
+  },
+  {
+    icon: <Layers size={32} className="text-white" />,
+    title: "Scalable Infrastructure",
+    line1: "Built to handle growth and demand.",
+    line2: "Reliable service at any scale."
+  },
+  {
+    icon: <Code size={32} className="text-white" />,
+    title: "Developer Friendly",
+    line1: "Easy to integrate with our API.",
+    line2: "Robust documentation and support."
+  }
+];
 
 function Feature() {
   const sectionRef = useRef(null);
@@ -8,65 +58,39 @@ function Feature() {
   const cardsRef = useRef([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Animate header letters
-            gsap.fromTo(
-              headerRef.current.children,
-              { opacity: 0, y: 50 },
-              {
-                opacity: 1,
-                y: 0,
-                stagger: 0.1,
-                duration: 1.2,
-                ease: 'power3.out',
-              }
-            );
-
-            // Animate cards one by one
-            gsap.to(cardsRef.current, {
-              opacity: 1,
-              y: 0,
-              stagger: 0.2,
-              duration: 1,
-              ease: 'power3.out',
-            });
-          } else {
-            // Reverse animation when section leaves viewport
-            gsap.to(headerRef.current.children, {
-              opacity: 0,
-              y: 50,
-              scrub:3,
-              duration: 0.8,
-              ease: 'power3.in',
-            });
-            gsap.to(cardsRef.current, {
-              opacity: 0,
-              y: 50,
-              scrub:3,
-              duration: 0.8,
-              ease: 'power3.in',
-            });
-          }
-        });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        toggleActions: 'play none none reverse',
       },
-      { threshold: 0.2 }
+    });
+
+    tl.fromTo(
+      headerRef.current.children,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 1.2,
+        ease: 'power3.out',
+      }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-
-    cardsRef.current.forEach((card) => {
-      if (card) gsap.set(card, { opacity: 0, y: 50 });
-    });
-    if (headerRef.current) {
-      gsap.set(headerRef.current.children, { opacity: 0, y: 50 });
-    }
-
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-    };
+    tl.fromTo(
+      cardsRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: 'power3.out',
+      },
+      '-=1'
+    );
   }, []);
 
   const handleMouseEnter = (e) => {
@@ -74,7 +98,7 @@ function Feature() {
       scale: 1.02,
       boxShadow: '0 8px 16px rgba(255,255,255,0.15)',
       duration: 0.3,
-      ease: 'power2.out'
+      ease: 'power2.out',
     });
   };
 
@@ -83,7 +107,7 @@ function Feature() {
       scale: 1,
       boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
       duration: 0.3,
-      ease: 'power2.out'
+      ease: 'power2.out',
     });
   };
 
@@ -104,7 +128,8 @@ function Feature() {
       </h1>
 
       <div className="flex flex-wrap justify-center gap-8 max-w-6xl w-full">
-        {Array.from({ length: 7 }, (_, i) => (
+        {/* 2. Render cards by mapping over the data array */}
+        {featuresData.map((feature, i) => (
           <div
             key={i}
             ref={(el) => (cardsRef.current[i] = el)}
@@ -112,11 +137,15 @@ function Feature() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="w-16 h-16 bg-red-500 mx-auto mb-4 rounded-lg"></div>
-            <h2 className="text-xl font-semibold mb-2">Feature {i + 1}</h2>
+            {/* 3. Render the icon from the data */}
+            <div className="w-16 h-16 bg-red-500 mx-auto mb-4 rounded-lg flex items-center justify-center">
+              {feature.icon}
+            </div>
+            {/* 4. Render the title and description from the data */}
+            <h2 className="text-xl font-semibold mb-2">{feature.title}</h2>
             <p className="text-gray-300 text-sm">
-              First line description for feature {i + 1}.<br />
-              Second line description for feature {i + 1}.
+              {feature.line1}<br />
+              {feature.line2}
             </p>
           </div>
         ))}

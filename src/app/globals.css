@@ -24,9 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
- .negetive{
-  mix-blend-mode:screen;
- }
+.negetive {
+  mix-blend-mode: screen;
+}
 
 /* Button hover white background progress bar */
 .proto-button div {
@@ -54,7 +54,6 @@ body {
   white-space: nowrap;
   vertical-align: bottom;
   line-height: 1;
-
 }
 
 .wave-text span {
@@ -84,6 +83,33 @@ body {
 }
 
 /* Feature section styles */
-*{
+* {
   scroll-behavior: smooth;
+}
+
+/* ===== Mac-style Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 120, 0.4);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(120, 120, 120, 0.6);
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 120, 0.4) transparent;
 }
